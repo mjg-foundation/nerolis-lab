@@ -46,6 +46,13 @@ export const SITE_NAV_ITEMS: readonly SiteNavItem[] = [
     spa: true
   },
   {
+    id: 'expcalculator',
+    label: 'EXP Calculator',
+    path: '/exp-calculator',
+    icon: 'mdi-chart-line',
+    spa: true
+  },
+  {
     id: 'settings',
     label: 'Settings',
     path: '/settings',

@@ -8,6 +8,7 @@ export enum RouteName {
   Calculator = 'Calculator',
   Compare = 'Compare',
   Recipes = 'Recipes',
+  ExpCalculator = 'EXP Calculator',
 
   // Settings
   Settings = 'Settings',
@@ -35,6 +36,7 @@ const ComparisonPage = () => import('@/pages/compare/comparison-page.vue')
 const RecipesPage = () => import('@/pages/recipe/recipes-page.vue')
 const TierlistPage = () => import('@/pages/tierlist/tierlist-page.vue')
 const DishInfographicPage = () => import('@/pages/dish-infographic/dish-infographic-page.vue')
+const ExpCalculatorPage = () => import('@/pages/exp-calculator/exp-calculator-page.vue')
 
 // User
 const SettingsPage = () => import('@/pages/settings/settings-page.vue')
@@ -106,6 +108,11 @@ const router = createRouter({
         level: route.query.level ? Number(route.query.level) : undefined,
         camp: route.query.camp ? route.query.camp === 'true' : undefined
       })
+    },
+    {
+      path: '/exp-calculator',
+      name: RouteName.ExpCalculator,
+      component: ExpCalculatorPage,
     },
     {
       path: '/settings',
