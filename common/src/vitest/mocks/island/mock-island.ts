@@ -16,6 +16,7 @@ export function island(attrs?: Partial<Island>): Island {
     name: 'Mock Island',
     berries: [],
     shortName: 'greengrass',
+    rankThresholds: [],
     ...attrs,
     expert: false
   };
@@ -27,6 +28,7 @@ export function expertIsland(attrs?: Partial<ExpertIsland>): ExpertIsland {
     shortName: 'GGEX',
     base: GREENGRASS,
     bonuses: greengrassExpertMode,
+    rankThresholds: [],
     ...attrs,
     expert: true
   };
