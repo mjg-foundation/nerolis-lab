@@ -50,6 +50,20 @@ describe('TeamResults', () => {
     expect(strengthSpan.text()).toBe('1,000')
     const totalStrength = wrapper.vm.totalStrengthString
     expect(totalStrength).toBe('1,000')
+    expect(wrapper.text()).toContain('Basic 1')
+    expect(wrapper.html()).toContain('alt="Poké Ball"')
+    expect(wrapper.html()).toContain('title="Poké Ball"')
+  })
+
+  it('uses canonical thresholds for legacy island instances', async () => {
+    const teamStore = useTeamStore()
+    const legacyIsland = { ...teamStore.getCurrentTeam.island } as Partial<typeof teamStore.getCurrentTeam.island>
+    delete legacyIsland.rankThresholds
+    teamStore.getCurrentTeam.island = legacyIsland as typeof teamStore.getCurrentTeam.island
+
+    await nextTick()
+
+    expect(wrapper.vm.projectedRank).toBe('Basic 1')
   })
 
   it('renders the stacked bar with correct percentages', async () => {

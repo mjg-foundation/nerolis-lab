@@ -21,6 +21,7 @@ import {
   type GetTeamsResponse,
   type IngredientSet,
   type IslandInstance,
+  type IslandInstanceDto,
   type PokemonInstanceExt,
   type PokemonInstanceIdentity,
   type TeamAreaDTO,
@@ -155,7 +156,7 @@ class TeamServiceImpl {
 
     const response = await serverAxios.post<CalculateTeamResponse>('/calculator/team', {
       members: parsedMembers,
-      settings
+      settings: { ...settings, island: this.toIslandDto(settings.island) }
     })
 
     const teamBerries: BerrySet[] = response.data.members.flatMap((member) => member.produceTotal.berries)
@@ -196,7 +197,7 @@ class TeamServiceImpl {
       bedtime: currentTeam.bedtime,
       wakeup: currentTeam.wakeup,
       stockpiledIngredients: currentTeam.stockpiledIngredients,
-      island: currentTeam.island
+      island: this.toIslandDto(currentTeam.island)
     }
 
     const berrySetup: PokemonInstanceIdentity = PokemonInstanceUtils.toPokemonInstanceIdentity({
@@ -239,6 +240,11 @@ class TeamServiceImpl {
       optimalIngredient: ingredientProduction,
       optimalSkill: skillProduction
     }
+  }
+
+  private toIslandDto(island: IslandInstanceDto): IslandInstanceDto {
+    const { name, shortName, areaBonus, berries, expertMode } = island
+    return { name, shortName, areaBonus, berries, expertMode }
   }
 
   private parseFavoredBerries(favoredBerriesStr: string): Berry[] {
